@@ -2,9 +2,12 @@ import React from 'react'
 
 import PanZoom from '@sasza/react-panzoom'
 
+// const produceBrushStandard = ({ color, width, height }) => {}
+
 const Drawing = ({
-  children,
+  height,
   moving,
+  width,
 }) => {
   const withPanZoom = (node) => {
     if (!moving) return node
@@ -15,7 +18,9 @@ const Drawing = ({
     )
   }
 
-  return withPanZoom(children)
+  const canvas = <canvas height={height} width={width} />
+
+  return withPanZoom(canvas)
 }
 
 export default Drawing
