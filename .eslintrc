@@ -6,7 +6,8 @@
   "globals": {
     "clearInterval": false,
     "console": false,
-    "setInterval": false
+    "setInterval": false,
+    "window": false
   },
   "settings": {
     "react": {
