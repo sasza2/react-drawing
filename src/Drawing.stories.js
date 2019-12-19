@@ -5,5 +5,11 @@ import Drawing from '.'
 export default { title: 'Drawing' };
 
 export const example = () => (
-  <Drawing height={200} width={300} />
+  <Drawing
+    brush={({ ctx, x, y }) => {
+      ctx.fillRect(x, y, 3, 3)
+    }}
+    height={1200}
+    width={800}
+  />
 )
