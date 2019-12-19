@@ -1,20 +1,14 @@
 import { createRef, useEffect, useLayoutEffect, useState} from 'react'
 
+import position from '../helpers/position'
+
 const useMove = (drawingRef) => {
   const positionRef = createRef()
-  const [moving, setMoving] = useState(false)  
+  const [moving, setMoving] = useState(null)  
 
-  const mousedown = () => setMoving(true)
-  const mouseup = () => setMoving(false)
-  const mousemove = (e) => {
-    if (e.target !== drawingRef.current) return
-
-    const rect = drawingRef.current.getBoundingClientRect();
-    positionRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    }
-  }
+  const mousedown = (e) => setMoving(position(drawingRef, e))
+  const mouseup = () => setMoving(null)
+  const mousemove = (e) => positionRef.current = position(drawingRef, e)
 
   useLayoutEffect(() => {
     const node = drawingRef.current
@@ -36,7 +30,7 @@ const useMove = (drawingRef) => {
     return () => window.removeEventListener('mousemove', mousemove)
   }, [moving])
 
-  return positionRef
+  return { positionRef, point: moving }
 }
 
 export default useMove
