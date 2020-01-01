@@ -7,14 +7,14 @@ const useDraw = ({ brush, canvasRef, move }) => {
     if (!move.point) return
 
     const ctx = canvasRef.current.getContext('2d')
-    brush({ ctx, ...move.point })
+    const brushMove = brush(ctx)
     const last = { ...move.point }
     
     const timer = setInterval(() => {
       const position = move.positionRef.current
       if (!position) return
 
-      draw({ brush, ctx, x1: last.x, y1: last.y, x2: position.x, y2: position.y })
+      draw({ brush: brushMove, x1: last.x, y1: last.y, x2: position.x, y2: position.y })
 
       last.x = position.x
       last.y = position.y
