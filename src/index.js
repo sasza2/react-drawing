@@ -1,10 +1,9 @@
 import React, { createRef, memo } from 'react'
 import PanZoom from '@sasza/react-panzoom'
 
+import useBrush from './hooks/useBrush'
 import useMove from './hooks/useMove'
 import useDraw from './hooks/useDraw'
-
-// const produceBrushStandard = ({ color, width, height }) => {}
 
 const Drawing = ({
   brush,
@@ -13,8 +12,9 @@ const Drawing = ({
   width,
 }) => {
   const canvasRef = createRef()
+  const brushRef = useBrush({ brush, canvasRef })
   const move = useMove(canvasRef)
-  useDraw({ brush, canvasRef, move })
+  useDraw({ brushRef, canvasRef, move })
 
   const withPanZoom = (node) => {
     if (!moving) return node
@@ -31,3 +31,4 @@ const Drawing = ({
 }
 
 export default memo(Drawing)
+export { default as brushBase64 } from './brush/base64'

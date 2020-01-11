@@ -1,12 +1,17 @@
-import { createRef, useEffect, useLayoutEffect, useState} from 'react'
+import { useEffect, useLayoutEffect, useRef, useState} from 'react'
 
 import position from '../helpers/position'
 
 const useMove = (drawingRef) => {
-  const positionRef = createRef()
+  const positionRef = useRef()
   const [moving, setMoving] = useState(null)  
 
-  const mousedown = (e) => setMoving(position(drawingRef, e))
+  const mousedown = (e) => {
+    const positionFromEvent = position(drawingRef, e)
+    positionRef.current = positionFromEvent
+    setMoving(positionFromEvent)
+  }
+
   const mouseup = () => setMoving(null)
   const mousemove = (e) => positionRef.current = position(drawingRef, e)
 
