@@ -19,7 +19,7 @@ const Drawing = ({
 }
 
 Drawing.propTypes = {
-  brush: PropTypes.func.isRequired,
+  brush: PropTypes.object.isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
 }
