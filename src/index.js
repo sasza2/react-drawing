@@ -1,4 +1,4 @@
-import React, { createRef, memo } from 'react'
+import React, { memo, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import useBrush from './hooks/useBrush'
@@ -10,7 +10,7 @@ const Drawing = ({
   height,
   width,
 }) => {
-  const canvasRef = createRef()
+  const canvasRef = useRef()
   const brushRef = useBrush({ brush, canvasRef })
   const move = useMove(canvasRef)
   useDraw({ brushRef, canvasRef, move })
@@ -26,3 +26,4 @@ Drawing.propTypes = {
 
 export default memo(Drawing)
 export { default as brushFromSrc } from './brush/fromSrc'
+export { default as brushRect } from './brush/rect'

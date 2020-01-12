@@ -8,11 +8,12 @@ const useBrush = ({ brush, canvasRef }) => {
 
   useLayoutEffect(() => {
     let origin = true
-    brush.then((func) => {
+    brush.then(({ draw, init }) => {
       if (!origin) return
 
       const ctx = canvasRef.current.getContext('2d')
-      brushRef.current = (x, y) => func(ctx, x, y)
+      if (init) init(ctx)
+      brushRef.current = (x, y) => draw(ctx, x, y)
     })
 
     return () => {

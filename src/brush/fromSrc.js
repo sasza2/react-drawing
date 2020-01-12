@@ -11,7 +11,7 @@ const brushFromSrc = (base64, { width, height } = {}) => new Promise((resolve) =
       ctx.drawImage(image, x - halfWidth, y - halfHeight, fullWidth, fullHeight)
     }
 
-    resolve(draw)
+    resolve({ draw })
   }
   image.src = base64
 })
