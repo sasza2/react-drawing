@@ -34,7 +34,5 @@
     "prop-types": "^15.0.0",
     "react": ">=16.8.6"
   },
-  "dependencies": {
-    "@sasza/react-panzoom": "^1.0.2"
-  }
+  "dependencies": {}
 }
