@@ -31,4 +31,4 @@ const Drawing = ({
 }
 
 export default memo(Drawing)
-export { default as brushBase64 } from './brush/base64'
+export { default as brushFromSrc } from './brush/fromSrc'

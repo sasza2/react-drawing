@@ -13,7 +13,6 @@ const useDraw = ({ brushRef, move }) => {
       const position = move.positionRef.current
       if (!position) return
       
-      console.log(last, position)
       draw({ brush: brushRef.current, x1: last.x, y1: last.y, x2: position.x, y2: position.y })
 
       last.x = position.x
