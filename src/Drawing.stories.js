@@ -20,5 +20,11 @@ export const example = () => (
         width={300}
       />
     </div>
+    <div style={{ display: 'inline-block', border: '1px solid #000' }}>
+      <Drawing
+        height={300}
+        width={300}
+      />
+    </div>
   </Fragment>
 )
