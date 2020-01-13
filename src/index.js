@@ -6,6 +6,8 @@ import useMove from './hooks/useMove'
 import useDraw from './hooks/useDraw'
 import brushArc from './brush/arc'
 
+import './Drawing.css'
+
 const Drawing = ({
   brush,
   height,
@@ -16,7 +18,7 @@ const Drawing = ({
   const move = useMove(canvasRef)
   useDraw({ brushRef, canvasRef, move })
 
-  return <canvas height={height} ref={canvasRef} width={width} />
+  return <canvas className='react-drawing' height={height} ref={canvasRef} width={width} />
 }
 
 Drawing.propTypes = {
