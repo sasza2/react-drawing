@@ -28,6 +28,8 @@
     "css-loader": "^3.4.2",
     "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.16.0",
+    "jest": "^24.9.0",
+    "jest-transform-css": "^2.0.0",
     "prop-types": "^15.0.0",
     "react": "16.8.6"
   },
