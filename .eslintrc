@@ -6,6 +6,7 @@
   "globals": {
     "clearInterval": false,
     "console": false,
+    "expect": false,
     "setInterval": false,
     "window": false,
     "Image": false,
