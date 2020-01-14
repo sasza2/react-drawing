@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode=production",
     "lint": "eslint src --fix",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
