@@ -8,6 +8,7 @@
     "console": false,
     "expect": false,
     "setInterval": false,
+    "test": false,
     "window": false,
     "Image": false,
     "Promise": false
