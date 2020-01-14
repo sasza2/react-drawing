@@ -9,7 +9,7 @@ const draw = ({ brush, x1, y1, x2, y2 }) => {
     if (y1 > y2) yDirection = -yDirection
     let currY = y1
     const to = Math.abs(x1 - x2)
-    for(let i = 0; i < to; i++, currY += yDirection){
+    for(let i = 0; i <= to; i++, currY += yDirection){
       brush(x1 + xDirection * i, currY)
     }
   } else {
@@ -17,7 +17,7 @@ const draw = ({ brush, x1, y1, x2, y2 }) => {
     if (x1 > x2) xDirection = -xDirection
     let currX = x1
     const to = Math.abs(y1 - y2)
-    for(let i = 0; i < to; i++, currX += xDirection){
+    for(let i = 0; i <= to; i++, currX += xDirection){
       brush(currX, y1 + yDirection * i)
     }
   }
