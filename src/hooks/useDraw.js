@@ -2,7 +2,9 @@ import { useLayoutEffect } from 'react'
 
 import draw from '../helpers/draw'
 
-const useDraw = ({ brushRef, move }) => {
+const useDraw = ({ brushRef, fps, move }) => {
+  const intervalTime = 1000 / fps
+
   useLayoutEffect(() => {
     if (!move.point) return
     brushRef.current(move.point.x, move.point.y)
@@ -17,10 +19,10 @@ const useDraw = ({ brushRef, move }) => {
 
       last.x = position.x
       last.y = position.y
-    }, 30)
+    }, intervalTime)
 
     return () => clearInterval(timer)
-  }, [move.point])
+  }, [intervalTime, move.point])
 }
 
 export default useDraw
