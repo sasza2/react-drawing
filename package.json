@@ -1,8 +1,14 @@
 {
   "name": "react-drawing",
   "version": "1.0.0",
-  "description": "",
+  "description": "React component for drawing on canvas.",
   "main": "dist/main.js",
+  "keywords": [
+    "react",
+    "drawing",
+    "canvas",
+    "brush"
+  ],
   "scripts": {
     "build": "webpack --mode=production",
     "lint": "eslint src --fix",
