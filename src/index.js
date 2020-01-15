@@ -33,5 +33,6 @@ Drawing.defaultProps = {
 
 export default memo(Drawing)
 export { brushArc }
+export { default as brushCustom } from './brush/custom'
 export { default as brushFromSrc } from './brush/fromSrc'
 export { default as brushRect } from './brush/rect'
