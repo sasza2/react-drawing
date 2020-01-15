@@ -11,12 +11,13 @@ import './Drawing.css'
 const Drawing = ({
   brush,
   height,
+  fps,
   width,
 }) => {
   const canvasRef = useRef()
   const brushRef = useBrush({ brush, canvasRef })
   const move = useMove(canvasRef)
-  useDraw({ brushRef, canvasRef, move })
+  useDraw({ brushRef, canvasRef, fps, move })
 
   return <canvas className='react-drawing' height={height} ref={canvasRef} width={width} />
 }
@@ -24,11 +25,13 @@ const Drawing = ({
 Drawing.propTypes = {
   brush: PropTypes.object,
   height: PropTypes.number.isRequired,
+  fps: PropTypes.number,
   width: PropTypes.number.isRequired,
 }
 
 Drawing.defaultProps = {
   brush: brushArc(),
+  fps: 30,
 }
 
 export default memo(Drawing)
