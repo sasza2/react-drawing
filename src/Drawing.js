@@ -31,14 +31,16 @@ Drawing.propTypes = {
     PropTypes.shape({ current: PropTypes.object }),
   ]),
   brush: PropTypes.object,
-  height: PropTypes.number.isRequired,
+  height: PropTypes.number,
   fps: PropTypes.number,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.number,
 }
 
 Drawing.defaultProps = {
   brush: brushArc(),
+  height: 300,
   fps: 30,
+  width: 300,
 }
 
 export default memo(forwardRef((props, ref) => <Drawing apiRef={ref} {...props} />))
