@@ -32,7 +32,8 @@
     "jest": "^24.9.0",
     "jest-transform-css": "^2.0.0",
     "prop-types": "^15.0.0",
-    "react": "16.8.6"
+    "react": "16.8.6",
+    "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",
