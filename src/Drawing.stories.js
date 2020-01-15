@@ -20,22 +20,15 @@ export const example = () => (
     <Box>
       <Drawing
         brush={brushFromSrc('https://raw.githubusercontent.com/sasza2/react-drawing/master/docs/example/smile.png', { width: 30, height: 30 })}
-        height={300}
-        width={300}
       />
     </Box>
     <Box>
       <Drawing
         brush={brushRect({ strokeStyle: 'red', width: 30, height: 20 })}
-        height={300}
-        width={300}
       />
     </Box>
     <Box>
-      <Drawing
-        height={300}
-        width={300}
-      />
+      <Drawing />
     </Box>
     <Box>
       <Drawing
@@ -51,8 +44,6 @@ export const example = () => (
             ctx.fill()
           }
         })}
-        height={300}
-        width={300}
       />
     </Box>
   </Fragment>
