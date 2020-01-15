@@ -1,4 +1,4 @@
-const brushFromSrc = (base64, { width, height } = {}) => new Promise((resolve) => {
+const brushFromSrc = (src, { width, height } = {}) => new Promise((resolve) => {
   const image = new Image()
   image.onload = () => {
     const fullWidth = (width || image.naturalWidth)
@@ -13,7 +13,7 @@ const brushFromSrc = (base64, { width, height } = {}) => new Promise((resolve) =
 
     resolve({ draw })
   }
-  image.src = base64
+  image.src = src
 })
 
 export default brushFromSrc
