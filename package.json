@@ -1,7 +1,7 @@
 {
   "name": "react-drawing",
-  "version": "1.0.0",
-  "description": "React component for drawing on canvas.",
+  "version": "1.1.0",
+  "description": "React component for drawing on canvas with possibility to pan and zoom.",
   "main": "dist/main.js",
   "keywords": [
     "react",
@@ -25,25 +25,25 @@
     "url": "https://github.com/sasza2/react-drawing/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
-    "@storybook/react": "^5.2.6",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.4.2",
-    "eslint": "^6.5.1",
-    "eslint-plugin-react": "^7.16.0",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "@storybook/react": "^5.3.18",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.20.0",
     "jest": "^24.9.0",
     "jest-transform-css": "^2.0.0",
-    "prop-types": "^15.0.0",
     "react": "16.8.6",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
-    "prop-types": "^15.0.0",
-    "react": ">=16.8.6"
+    "react": ">=16.9.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@sasza/react-panzoom": "^1.2.1",
+    "prop-types": "^15.0.0"
+  }
 }
