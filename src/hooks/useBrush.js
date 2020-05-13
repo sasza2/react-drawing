@@ -2,17 +2,20 @@ import { useLayoutEffect, useRef } from 'react'
 
 const NOOP = () => {}
 
-const useBrush = ({ brush, canvasRef }) => {
+const useBrush = ({ brush, canvasRef, move }) => {
   const brushRef = useRef()
   if (!brushRef.current) brushRef.current = NOOP
 
   useLayoutEffect(() => {
+    if (!brush) return
+
     let origin = true
     brush.then(({ draw, init }) => {
       if (!origin) return
 
+      const zoom = move.panZoomOffsetRef.current.zoom
       const ctx = canvasRef.current.getContext('2d')
-      if (init) init(ctx)
+      if (init) init(ctx, { zoom })
       brushRef.current = (x, y) => draw(ctx, x, y)
     })
 
