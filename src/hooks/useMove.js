@@ -2,24 +2,40 @@ import { useEffect, useLayoutEffect, useRef, useState} from 'react'
 
 import position from '../helpers/position'
 
-const useMove = (drawingRef) => {
+const useMove = ({ brush, canvasRef, panZoomRef }) => {
   const positionRef = useRef()
-  const [moving, setMoving] = useState(null)  
+  const panZoomOffsetRef = useRef(() => ({
+    rect: { left: 0, top: 0 },
+    position: { x: 0, y: 0 },
+    zoom: 1,
+  }))
+  const [moving, setMoving] = useState(null)
+
+  useEffect(() => {
+    panZoomOffsetRef.current = {
+      rect: panZoomRef.current.ref().current.parentNode.getBoundingClientRect(),
+      position: panZoomRef.current.getPosition(),
+      zoom: panZoomRef.current.getZoom(),
+    }
+  }, [brush])
 
   const mousedown = (e) => {
     e.preventDefault()
     e.stopPropagation()
     
-    const positionFromEvent = position(drawingRef, e)
+    const positionFromEvent = position(canvasRef, panZoomOffsetRef.current, e)
     positionRef.current = positionFromEvent
     setMoving(positionFromEvent)
   }
 
   const mouseup = () => setMoving(null)
-  const mousemove = (e) => positionRef.current = position(drawingRef, e)
+
+  const mousemove = (e) => {
+    positionRef.current = position(canvasRef, panZoomOffsetRef.current, e)
+  }
 
   useLayoutEffect(() => {
-    const node = drawingRef.current
+    const node = canvasRef.current
     if (!node) return
 
     node.addEventListener('mousedown', mousedown)
@@ -33,9 +49,9 @@ const useMove = (drawingRef) => {
       window.removeEventListener('mouseup', mouseup)
       window.removeEventListener('touchend', mouseup)
     }
-  })
+  }, [brush])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!moving) return
 
     window.addEventListener('mousemove', mousemove)
@@ -46,7 +62,7 @@ const useMove = (drawingRef) => {
     }
   }, [moving])
 
-  return { positionRef, point: moving }
+  return { panZoomOffsetRef, positionRef, point: moving }
 }
 
 export default useMove
