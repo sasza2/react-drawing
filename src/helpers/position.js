@@ -13,17 +13,18 @@ const getMousePosition = (e) => {
   }
 }
 
-const position = (drawingRef, e) => {
+const position = (drawingRef, panZoom, e) => {
   if (e.target !== drawingRef.current) return
 
-  const rect = drawingRef.current.getBoundingClientRect();
   const position = getMousePosition(e)
   if (!position) return null
 
-  return {
-    x: position.clientX - rect.left,
-    y: position.clientY - rect.top,
+  const ret = {
+    x: (position.clientX - panZoom.rect.left - panZoom.position.x) / panZoom.zoom,
+    y: (position.clientY - panZoom.rect.top - panZoom.position.y) / panZoom.zoom,
   }
+
+  return ret
 }
 
 export default position
