@@ -1,5 +1,6 @@
-import React, { forwardRef, memo, useRef } from 'react'
+import React, { forwardRef, memo, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
+import PanZoom from '@sasza/react-panzoom'
 
 import brushArc from './brush/arc'
 import useApi from './hooks/useApi'
@@ -7,7 +8,10 @@ import useBrush from './hooks/useBrush'
 import useMove from './hooks/useMove'
 import useDraw from './hooks/useDraw'
 
-import './Drawing.css'
+const STYLE = {
+  CANVAS_BACKGROUND: '#fff',
+  CONTAINER_BACKGROUND: '#ddd',
+}
 
 const Drawing = ({
   apiRef,
@@ -17,12 +21,38 @@ const Drawing = ({
   width,
 }) => {
   const canvasRef = useRef()
-  const brushRef = useBrush({ brush, canvasRef })
-  const move = useMove(canvasRef)
-  useDraw({ brushRef, canvasRef, fps, move })
+  const panZoomRef = useRef()
+  const move = useMove({ brush, canvasRef, panZoomRef })
+  const brushRef = useBrush({ brush, canvasRef, move })    
+  useDraw({ brushRef, canvasRef, fps, move, panZoomRef })
   useApi({ apiRef, brushRef, canvasRef })
 
-  return <canvas className='react-drawing' height={height} ref={canvasRef} width={width} />
+  const panZoomDisabled = useMemo(() => brush !== null, [brush])
+
+  const canvasStyle = useMemo(() => {
+    const props = {
+      backgroundColor: STYLE.CANVAS_BACKGROUND,
+      touchAction: 'none',
+    }
+
+    if (panZoomDisabled) props.pointerEvents = 'all'
+
+    return props
+  }, [panZoomDisabled])
+
+  const containerStyle = useMemo(() => ({
+    backgroundColor: STYLE.CONTAINER_BACKGROUND,
+    width,
+    height,
+  }), [width, height])
+
+  return (
+    <div style={containerStyle}>
+      <PanZoom disabled={panZoomDisabled} ref={panZoomRef}>
+        <canvas style={canvasStyle} height={height} ref={canvasRef} width={width} />
+      </PanZoom>
+    </div>
+  )
 }
 
 Drawing.propTypes = {
