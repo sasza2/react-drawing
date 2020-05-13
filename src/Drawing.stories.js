@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import Drawing, { brushCustom, brushFromSrc, brushRect } from '.'
+import Drawing, { brushCustom, brushFromSrc, brushPanZoom, brushRect } from '.'
 
 export default { title: 'Drawing' };
 
 const Box = ({ children }) => (
-  <div style={{ display: 'inline-block', border: '1px solid #000' }}>
+  <div style={{ display: 'inline-block', border: '1px solid #000', width: 300, height: 300 }}>
     {children}
   </div>
 )
@@ -46,5 +46,36 @@ export const example = () => (
         })}
       />
     </Box>
+    <Box>
+      <Drawing
+        brush={brushPanZoom()}
+      />
+    </Box>
   </Fragment>
 )
+
+export const panZoom = () => {
+  const [panZoom, setPanZoom] = useState(false)
+
+  const changeBrush = () => setPanZoom(!panZoom)
+
+  return (
+    <Box>
+      <Drawing
+        brush={
+          panZoom
+            ? brushPanZoom()
+            : brushRect({ strokeStyle: 'red', width: 30, height: 20 })
+        }
+      />
+      <label>
+        <input
+          type='checkbox'
+          checked={panZoom}
+          onClick={changeBrush}
+        />
+        pan zoom mode
+      </label>
+    </Box>
+  )
+}
