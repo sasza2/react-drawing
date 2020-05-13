@@ -15,7 +15,13 @@ const useDraw = ({ brushRef, fps, move }) => {
       const position = move.positionRef.current
       if (!position) return
       
-      draw({ brush: brushRef.current, x1: last.x, y1: last.y, x2: position.x, y2: position.y })
+      draw({
+        brush: brushRef.current,
+        x1: last.x,
+        y1: last.y,
+        x2: position.x,
+        y2: position.y,
+      })
 
       last.x = position.x
       last.y = position.y
