@@ -1,3 +1,3 @@
-const brushPanZoom = () => null
+const brushPanZoom = () => null;
 
-export default brushPanZoom
+export default brushPanZoom;

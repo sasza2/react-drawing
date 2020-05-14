@@ -1,21 +1,23 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react';
 
 const useApi = ({ apiRef, brushRef, canvasRef }) => {
   useLayoutEffect(() => {
-    if (!apiRef) return
+    const nextApiRef = apiRef;
+
+    if (!nextApiRef) return;
 
     const api = {
       brush: (x, y) => {
-        if (brushRef.current) brushRef.current(x, y)
+        if (brushRef.current) brushRef.current(x, y);
       },
       getCanvas: () => canvasRef.current,
       getContext: () => canvasRef.current.getContext('2d'),
       toDataURL: () => canvasRef.current.toDataURL(),
-    }
+    };
 
-    if ('current' in apiRef) apiRef.current = api
-    else apiRef(api)
-  }, [apiRef])
-}
+    if ('current' in nextApiRef) nextApiRef.current = api;
+    else nextApiRef(api);
+  }, [apiRef]);
+};
 
-export default useApi
+export default useApi;

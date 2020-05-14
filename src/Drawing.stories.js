@@ -1,22 +1,27 @@
-import React, { Fragment, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import Drawing, { brushCustom, brushFromSrc, brushPanZoom, brushRect } from '.'
+import Drawing, {
+  brushCustom, brushFromSrc, brushPanZoom, brushRect,
+} from '.';
 
 export default { title: 'Drawing' };
 
 const Box = ({ children }) => (
-  <div style={{ display: 'inline-block', border: '1px solid #000', width: 300, height: 300 }}>
+  <div style={{
+    display: 'inline-block', border: '1px solid #000', width: 300, height: 300,
+  }}
+  >
     {children}
   </div>
-)
+);
 
 Box.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export const example = () => (
-  <Fragment>
+  <>
     <Box>
       <Drawing
         brush={brushFromSrc('https://raw.githubusercontent.com/sasza2/react-drawing/master/docs/example/smile.png', { width: 30, height: 30 })}
@@ -34,15 +39,15 @@ export const example = () => (
       <Drawing
         brush={brushCustom({
           init: (ctx) => {
-            ctx.fillStyle = 'red'
+            ctx.fillStyle = 'red';
           },
           draw: (ctx, x, y) => {
-            ctx.beginPath()
-            ctx.moveTo(x,y)
-            ctx.lineTo(x + 25,y + 25)
-            ctx.lineTo(x + 25, y - 25)
-            ctx.fill()
-          }
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + 25, y + 25);
+            ctx.lineTo(x + 25, y - 25);
+            ctx.fill();
+          },
         })}
       />
     </Box>
@@ -51,31 +56,36 @@ export const example = () => (
         brush={brushPanZoom()}
       />
     </Box>
-  </Fragment>
-)
+  </>
+);
 
-export const panZoom = () => {
-  const [panZoom, setPanZoom] = useState(false)
+export const panZoomExample = () => {
+  const [panZoom, setPanZoom] = useState(false);
 
-  const changeBrush = () => setPanZoom(!panZoom)
+  const changeBrush = () => setPanZoom(!panZoom);
 
   return (
     <Box>
       <Drawing
+        containerWidth={300}
+        containerHeight={300}
+        width={1000}
+        height={1000}
         brush={
           panZoom
             ? brushPanZoom()
             : brushRect({ strokeStyle: 'red', width: 30, height: 20 })
         }
       />
-      <label>
+      <label htmlFor="panzoom-checkbox">
         <input
-          type='checkbox'
+          id="panzoom-checkbox"
+          type="checkbox"
           checked={panZoom}
-          onClick={changeBrush}
+          onChange={changeBrush}
         />
         pan zoom mode
       </label>
     </Box>
-  )
-}
+  );
+};
