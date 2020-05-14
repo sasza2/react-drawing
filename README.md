@@ -1,10 +1,14 @@
 # react-drawing
-React component for drawing on canvas.
+React component for drawing on canvas with possibility to pan and zoom from library <a href="https://www.npmjs.com/package/@sasza/react-panzoom">@sasza/react-panzoom</a>.
 
 !["Preview"](docs/preview.gif "Example preview")
 
 # Demo
-https://codesandbox.io/s/romantic-tesla-oqdmx
+https://codesandbox.io/s/romantic-tesla-oqdmx - above example
+
+https://codesandbox.io/s/strange-cerf-r4txf - example with pan and zoom
+
+https://codesandbox.io/s/quirky-wilbur-ejfjm - example with custom brush color
 
 # Installation
 ```sh
@@ -14,6 +18,10 @@ npm install react-drawing
 # Usage
 Example from GIF above:
 ```jsx
+import Drawing, { brushFromSrc } from 'react-drawing'
+
+// ...
+
 <Drawing
   brush={brushFromSrc('smile.png',{ width: 30, height: 30 })}
 />
@@ -26,6 +34,8 @@ Example from GIF above:
 | height | 300 | canvas height in px |
 | fps | 30 | drawing interval time |
 | width | 300 | canvas width in px |
+| containerWidth | width | width of canvas container |
+| containerHeight | height | height of canvas container |
 
 
 # Brush
@@ -48,6 +58,15 @@ Brush on canvas with specified image. Could be also base64.
 brushRect({ fillStyle = 'black', lineWidth = 5, width, height })
 ```
 Brush on canvas with rect.
+
+---
+
+```js
+brushPanZoom()
+```
+Pan and zoom on canvas.
+
+!["Preview"](docs/preview_panzoom.gif "Example pan and zoom preview")
 
 ---
 

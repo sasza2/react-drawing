@@ -1,28 +1,31 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react';
 
-const NOOP = () => {}
+const NOOP = () => {};
 
-const useBrush = ({ brush, canvasRef }) => {
-  const brushRef = useRef()
-  if (!brushRef.current) brushRef.current = NOOP
+const useBrush = ({ brush, canvasRef, move }) => {
+  const brushRef = useRef();
+  if (!brushRef.current) brushRef.current = NOOP;
 
   useLayoutEffect(() => {
-    let origin = true
-    brush.then(({ draw, init }) => {
-      if (!origin) return
+    if (!brush) return undefined;
 
-      const ctx = canvasRef.current.getContext('2d')
-      if (init) init(ctx)
-      brushRef.current = (x, y) => draw(ctx, x, y)
-    })
+    let origin = true;
+    brush.then(({ draw, init }) => {
+      if (!origin) return;
+
+      const { zoom } = move.panZoomOffsetRef.current;
+      const ctx = canvasRef.current.getContext('2d');
+      if (init) init(ctx, { zoom });
+      brushRef.current = (x, y) => draw(ctx, x, y);
+    });
 
     return () => {
-      brushRef.current = NOOP
-      origin = false
-    }
-  }, [brush])
+      brushRef.current = NOOP;
+      origin = false;
+    };
+  }, [brush]);
 
-  return brushRef
-}
+  return brushRef;
+};
 
-export default useBrush
+export default useBrush;

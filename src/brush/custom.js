@@ -1,5 +1,5 @@
 const brushCustom = ({ draw, init }) => new Promise((resolve) => {
-  resolve({ draw, init })
-})
+  resolve({ draw, init });
+});
 
-export default brushCustom
+export default brushCustom;

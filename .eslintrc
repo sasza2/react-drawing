@@ -1,8 +1,15 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
   ],
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": 0
+  },
   "globals": {
     "clearInterval": false,
     "console": false,
@@ -15,7 +22,7 @@
   },
   "settings": {
     "react": {
-      "version": "latest"
+      "version": "16.9.0"
     }
   },
   "parser": "babel-eslint"

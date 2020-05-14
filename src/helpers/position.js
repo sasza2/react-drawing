@@ -1,29 +1,32 @@
 const getMousePosition = (e) => {
-  if(!isNaN(e.clientX) && !isNaN(e.clientY)) return {
-    clientX: e.clientX,
-    clientY: e.clientY,
+  if (!Number.isNaN(e.clientX) && !Number.isNaN(e.clientY)) {
+    return {
+      clientX: e.clientX,
+      clientY: e.clientY,
+    };
   }
 
-  const { touches } = e
-  if (!touches) return null
+  const { touches } = e;
+  if (!touches) return null;
 
   return {
     clientX: touches[0].clientX,
     clientY: touches[0].clientY,
-  }
-}
+  };
+};
 
-const position = (drawingRef, e) => {
-  if (e.target !== drawingRef.current) return
+const position = (drawingRef, panZoom, e) => {
+  if (e.target !== drawingRef.current) return null;
 
-  const rect = drawingRef.current.getBoundingClientRect();
-  const position = getMousePosition(e)
-  if (!position) return null
+  const mousePosition = getMousePosition(e);
+  if (!mousePosition) return null;
 
-  return {
-    x: position.clientX - rect.left,
-    y: position.clientY - rect.top,
-  }
-}
+  const ret = {
+    x: (mousePosition.clientX - panZoom.rect.left - panZoom.position.x) / panZoom.zoom,
+    y: (mousePosition.clientY - panZoom.rect.top - panZoom.position.y) / panZoom.zoom,
+  };
 
-export default position
+  return ret;
+};
+
+export default position;
