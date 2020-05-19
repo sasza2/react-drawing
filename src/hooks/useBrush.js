@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 
 const NOOP = () => {};
 
@@ -6,24 +6,32 @@ const useBrush = ({ brush, canvasRef, move }) => {
   const brushRef = useRef();
   if (!brushRef.current) brushRef.current = NOOP;
 
+  const dependencies = useMemo(() => {
+    if (!brush || !brush.dependencies) return null;
+    return JSON.stringify(brush.dependencies);
+  }, [brush]);
+
   useLayoutEffect(() => {
     if (!brush) return undefined;
 
-    let origin = true;
-    brush.then(({ draw, init }) => {
-      if (!origin) return;
+    let isMounted = true;
+    brush.promise().then(({ draw, init }) => {
+      if (!isMounted) return;
 
       const { zoom } = move.panZoomOffsetRef.current;
       const ctx = canvasRef.current.getContext('2d');
-      if (init) init(ctx, { zoom });
-      brushRef.current = (x, y) => draw(ctx, x, y);
+      const options = init
+        ? init(ctx, { zoom })
+        : undefined;
+
+      brushRef.current = (x, y) => draw(ctx, x, y, options);
     });
 
     return () => {
       brushRef.current = NOOP;
-      origin = false;
+      isMounted = false;
     };
-  }, [brush]);
+  }, [dependencies]);
 
   return brushRef;
 };
