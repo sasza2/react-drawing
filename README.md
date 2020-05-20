@@ -10,6 +10,8 @@ https://codesandbox.io/s/strange-cerf-r4txf - example with pan and zoom
 
 https://codesandbox.io/s/quirky-wilbur-ejfjm - example with custom brush color
 
+https://codesandbox.io/s/angry-architecture-ucue3 - example with drawing text
+
 # Installation
 ```sh
 npm install react-drawing
@@ -55,6 +57,15 @@ Brush on canvas with specified image. Could be also base64.
 ---
 
 ```js
+brushText({
+  fillStyle = 'black', font = 'Arial', text, size = 10,
+})
+```
+Brush on canvas with text.
+
+---
+
+```js
 brushRect({ fillStyle = 'black', lineWidth = 5, width, height })
 ```
 Brush on canvas with rect.
@@ -83,7 +94,7 @@ import Drawing, { brushCustom } from 'react-drawing'
 <Drawing
   brush={brushCustom({
     init: (ctx) => {
-      ctx.fillStyle = 'red'
+      ctx.fillStyle = fillStyle // red
     },
     draw: (ctx, x, y) => {
       ctx.beginPath()
@@ -91,14 +102,16 @@ import Drawing, { brushCustom } from 'react-drawing'
       ctx.lineTo(x + 25,y + 25)
       ctx.lineTo(x + 25, y - 25)
       ctx.fill()
-    }
+    },
+    dependencies: [fillStyle],
   })}
   height={200}
   width={400}
 />
 ```
 
-`init()` method is executed only once, so it's a good place for setting color, line width, stroke-dasharray etc.
+`init()` method is executed only once, so it's a good place for setting color, line width, stroke-dasharray etc.<br />
+`dependencies[]` array to reinit on change.
 
 # API
 | Name | Description |
