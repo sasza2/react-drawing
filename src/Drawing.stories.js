@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Drawing, {
-  brushCustom, brushFromSrc, brushPanZoom, brushRect,
+  brushCustom, brushFromSrc, brushPanZoom, brushRect, brushText,
 } from '.';
 
 export default { title: 'Drawing' };
@@ -54,6 +54,11 @@ export const example = () => (
     <Box>
       <Drawing
         brush={brushPanZoom()}
+      />
+    </Box>
+    <Box>
+      <Drawing
+        brush={brushText({ fillStyle: 'green', text: 'hello world', size: 25 })}
       />
     </Box>
   </>
