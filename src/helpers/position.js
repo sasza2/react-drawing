@@ -1,5 +1,5 @@
 const getMousePosition = (e) => {
-  if (!Number.isNaN(e.clientX) && !Number.isNaN(e.clientY)) {
+  if ('clientX' in e) {
     return {
       clientX: e.clientX,
       clientY: e.clientY,
