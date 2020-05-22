@@ -1,6 +1,4 @@
-import {
-  useEffect, useLayoutEffect, useRef, useState,
-} from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 import position from '../helpers/position';
 
@@ -13,17 +11,15 @@ const useMove = ({ brush, canvasRef, panZoomRef }) => {
   }));
   const [moving, setMoving] = useState(null);
 
-  useEffect(() => {
+  const mousedown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     panZoomOffsetRef.current = {
       rect: panZoomRef.current.ref().current.parentNode.getBoundingClientRect(),
       position: panZoomRef.current.getPosition(),
       zoom: panZoomRef.current.getZoom(),
     };
-  }, [brush]);
-
-  const mousedown = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
 
     const positionFromEvent = position(canvasRef, panZoomOffsetRef.current, e);
     positionRef.current = positionFromEvent;
