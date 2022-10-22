@@ -43,7 +43,7 @@ import Drawing, { brushFromSrc } from 'react-drawing'
 # Brush
 
 ```js
-brushArc({ fillStyle = 'black', size = 10 })
+brushArc({ fillStyle: 'black', size: 10 })
 ```
 Brush on canvas with `arc`.
 
@@ -58,7 +58,7 @@ Brush on canvas with specified image. Could be also base64.
 
 ```js
 brushText({
-  fillStyle = 'black', font = 'Arial', text, size = 10,
+  fillStyle: 'black', font: 'Arial', text, size: 10,
 })
 ```
 Brush on canvas with text.
@@ -66,7 +66,7 @@ Brush on canvas with text.
 ---
 
 ```js
-brushRect({ fillStyle = 'black', lineWidth = 5, width, height })
+brushRect({ fillStyle: 'black', lineWidth: 5, width, height })
 ```
 Brush on canvas with rect.
 
