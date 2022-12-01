@@ -1,4 +1,13 @@
-const getMousePosition = (e) => {
+import { MutableRefObject } from 'react';
+
+import { Move, Position } from 'types';
+
+type EventPosition = {
+  clientX: number,
+  clientY: number,
+}
+
+const getMousePosition = (e: MouseEvent): EventPosition | null => {
   if ('clientX' in e) {
     return {
       clientX: e.clientX,
@@ -6,7 +15,7 @@ const getMousePosition = (e) => {
     };
   }
 
-  const { touches } = e;
+  const { touches } = e as unknown as TouchEvent;
   if (!touches) return null;
 
   return {
@@ -15,8 +24,12 @@ const getMousePosition = (e) => {
   };
 };
 
-const position = (drawingRef, panZoom, e) => {
-  if (e.target !== drawingRef.current) return null;
+const position = (
+  canvasRef: MutableRefObject<HTMLCanvasElement>,
+  panZoom: Move['panZoomOffsetRef']['current'],
+  e: MouseEvent,
+): Position | null => {
+  if (e.target !== canvasRef.current) return null;
 
   const mousePosition = getMousePosition(e);
   if (!mousePosition) return null;

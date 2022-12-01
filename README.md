@@ -4,6 +4,8 @@ React component for drawing on canvas with possibility to pan and zoom from libr
 !["Preview"](docs/preview.gif "Example preview")
 
 # Demo
+https://codesandbox.io/s/crazy-wildflower-i23nbu - toolbox example
+
 https://codesandbox.io/s/romantic-tesla-oqdmx - above example
 
 https://codesandbox.io/s/strange-cerf-r4txf - example with pan and zoom

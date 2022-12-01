@@ -1,8 +1,15 @@
 import { useLayoutEffect } from 'react';
 
+import { BrushRef, Move } from 'types';
 import draw from '../helpers/draw';
 
-const useDraw = ({ brushRef, fps, move }) => {
+type UseDraw = (props: {
+  brushRef: BrushRef,
+  fps: number,
+  move: Move,
+}) => void
+
+const useDraw: UseDraw = ({ brushRef, fps, move }) => {
   const intervalTime = 1000 / fps;
 
   useLayoutEffect(() => {

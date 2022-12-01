@@ -1,7 +1,10 @@
+.github
 .storybook
 docs
 src
 .babelrc
 .eslintrc
 jest.config.js
+tsconfig.eslint.json
+tsconfig.json
 webpack.config.js

@@ -1,12 +1,14 @@
+import { BrushArc, InitAction, DrawAction } from 'types';
 import memo from '../helpers/brushMemo';
 
-const brushArc = ({ fillStyle = 'black', size = 10 } = {}) => memo(
+
+const brushArc: BrushArc = ({ fillStyle = 'black', size = 10 } = {}) => memo(
   () => new Promise((resolve) => {
-    const init = (ctx) => {
+    const init: InitAction = (ctx) => {
       ctx.fillStyle = fillStyle;
     };
 
-    const draw = (ctx, x, y) => {
+    const draw: DrawAction = (ctx, x, y) => {
       ctx.beginPath();
       ctx.arc(x, y, size, 0, 2 * Math.PI);
       ctx.fill();
