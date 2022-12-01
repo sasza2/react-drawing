@@ -1,4 +1,16 @@
-const draw = ({
+import { BrushRef } from 'types';
+
+type DrawProps = {
+  brush: BrushRef['current'],
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+}
+
+type Draw = (props: DrawProps) => void
+
+const draw: Draw = ({
   brush, x1, y1, x2, y2,
 }) => {
   const xDirection = x1 < x2 ? 1 : -1;

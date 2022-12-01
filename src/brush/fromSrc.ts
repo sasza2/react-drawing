@@ -1,6 +1,7 @@
+import { BrushFromSrc, DrawAction } from 'types';
 import memo from '../helpers/brushMemo';
 
-const brushFromSrc = (src, { width, height } = {}) => memo(
+const brushFromSrc: BrushFromSrc = (src, { width, height } = {}) => memo(
   () => new Promise((resolve) => {
     const image = new Image();
     image.onload = () => {
@@ -10,7 +11,7 @@ const brushFromSrc = (src, { width, height } = {}) => memo(
       const halfWidth = fullWidth / 2;
       const halfHeight = fullHeight / 2;
 
-      const draw = (ctx, x, y) => {
+      const draw: DrawAction = (ctx, x, y) => {
         ctx.drawImage(image, x - halfWidth, y - halfHeight, fullWidth, fullHeight);
       };
 

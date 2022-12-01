@@ -1,9 +1,21 @@
-import { useLayoutEffect, useMemo, useRef } from 'react';
+import {
+  MutableRefObject, useLayoutEffect, useMemo, useRef,
+} from 'react';
 
-const NOOP = () => {};
+import { BrushMemoReturn, BrushRef, Move } from 'types';
 
-const useBrush = ({ brush, canvasRef, move }) => {
-  const brushRef = useRef();
+const NOOP = (() => null) as BrushRef['current'];
+
+type UseBrushProps = {
+  brush?: BrushMemoReturn,
+  canvasRef: MutableRefObject<HTMLCanvasElement>,
+  move: Move,
+}
+
+type UseBrush = (props: UseBrushProps) => BrushRef
+
+const useBrush: UseBrush = ({ brush, canvasRef, move }) => {
+  const brushRef: BrushRef = useRef();
   if (!brushRef.current) brushRef.current = NOOP;
 
   const dependencies = useMemo(() => {

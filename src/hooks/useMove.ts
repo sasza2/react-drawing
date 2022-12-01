@@ -1,22 +1,34 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  MutableRefObject, useLayoutEffect, useRef, useState,
+} from 'react';
 
+import {
+  BrushMemoReturn, Move, PanZoomAPI, Position,
+} from 'types';
 import position from '../helpers/position';
 
-const useMove = ({ brush, canvasRef, panZoomRef }) => {
-  const positionRef = useRef();
-  const panZoomOffsetRef = useRef(() => ({
+type UseMove = (props: {
+  brush: BrushMemoReturn,
+  canvasRef: MutableRefObject<HTMLCanvasElement>,
+  panZoomRef: MutableRefObject<PanZoomAPI>
+}) => Move
+
+const useMove: UseMove = ({ brush, canvasRef, panZoomRef }) => {
+  const positionRef = useRef<Position>();
+  const panZoomOffsetRef = useRef<Move['panZoomOffsetRef']['current']>({
     rect: { left: 0, top: 0 },
     position: { x: 0, y: 0 },
     zoom: 1,
-  }));
-  const [moving, setMoving] = useState(null);
+  });
+  const [moving, setMoving] = useState<Position | null>(null);
 
-  const mousedown = (e) => {
+  const mousedown = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
+    const childNode = panZoomRef.current.ref().current;
     panZoomOffsetRef.current = {
-      rect: panZoomRef.current.ref().current.parentNode.getBoundingClientRect(),
+      rect: (childNode.parentNode as HTMLDivElement).getBoundingClientRect(),
       position: panZoomRef.current.getPosition(),
       zoom: panZoomRef.current.getZoom(),
     };
@@ -28,7 +40,7 @@ const useMove = ({ brush, canvasRef, panZoomRef }) => {
 
   const mouseup = () => setMoving(null);
 
-  const mousemove = (e) => {
+  const mousemove = (e: MouseEvent) => {
     positionRef.current = position(canvasRef, panZoomOffsetRef.current, e);
   };
 

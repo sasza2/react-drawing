@@ -1,6 +1,6 @@
 {
   "name": "react-drawing",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "React component for drawing on canvas with possibility to pan and zoom.",
   "main": "dist/main.js",
   "keywords": [
@@ -9,9 +9,10 @@
     "canvas",
     "brush"
   ],
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "webpack --mode=production",
-    "lint": "eslint src --fix",
+    "lint": "eslint src --fix --ext .ts,.tsx",
     "storybook": "start-storybook",
     "test": "jest"
   },
@@ -29,24 +30,31 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.18.6",
     "@storybook/react": "^5.3.18",
+    "@types/jest": "^26.0.15",
+    "@types/react": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
-    "jest": "^24.9.0",
-    "jest-transform-css": "^2.0.0",
-    "react": "16.8.6",
+    "jest": "^26.4.4",
+    "react": "16.9.0",
+    "ts-jest": "^26.4.4",
+    "ts-loader": "~8.0.11",
+    "typescript": "~4.1.2",
     "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
     "react": ">=16.9.0"
   },
   "dependencies": {
-    "@sasza/react-panzoom": "^1.2.1",
-    "prop-types": "^15.0.0"
+    "@sasza/react-panzoom": "^1.6.2"
   }
 }

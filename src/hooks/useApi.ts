@@ -1,12 +1,22 @@
-import { useLayoutEffect } from 'react';
+import { MutableRefObject, useLayoutEffect } from 'react';
 
-const useApi = ({ apiRef, brushRef, canvasRef }) => {
+import { API, ApiRef, BrushRef } from 'types';
+
+type UseApiProps = {
+  apiRef?: ApiRef,
+  brushRef: BrushRef,
+  canvasRef: MutableRefObject<HTMLCanvasElement>,
+}
+
+type UseApi = (props: UseApiProps) => void
+
+const useApi: UseApi = ({ apiRef, brushRef, canvasRef }) => {
   useLayoutEffect(() => {
     const nextApiRef = apiRef;
 
     if (!nextApiRef) return;
 
-    const api = {
+    const api: API = {
       brush: (x, y) => {
         if (brushRef.current) brushRef.current(x, y);
       },
