@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 
-export { API as PanZoomAPI } from '@sasza/react-panzoom';
+export { PanZoomApi } from '@sasza/react-panzoom/types/types';
 
 export type InitAction = (
   ctx: CanvasRenderingContext2D,

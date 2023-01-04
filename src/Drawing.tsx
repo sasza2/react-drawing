@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import PanZoom from '@sasza/react-panzoom';
 
-import { ApiRef, DrawingProps, PanZoomAPI } from 'types';
+import { ApiRef, DrawingProps, PanZoomApi } from 'types';
 import brushArc from 'brush/arc';
 import useApi from 'hooks/useApi';
 import useBrush from 'hooks/useBrush';
@@ -25,7 +25,7 @@ const Drawing: React.FC<DrawingProps> = ({
   width = 300,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
-  const panZoomRef = useRef<PanZoomAPI>();
+  const panZoomRef = useRef<PanZoomApi>();
   const move = useMove({ brush, canvasRef, panZoomRef });
   const brushRef = useBrush({ brush, canvasRef, move });
   const panZoomDisabled = brush !== null;
@@ -52,13 +52,14 @@ const Drawing: React.FC<DrawingProps> = ({
 
   return (
     <div style={containerStyle}>
-      <PanZoom disabled={panZoomDisabled} apiRef={panZoomRef}>
+      <PanZoom disabled={panZoomDisabled} ref={panZoomRef}>
         <canvas style={canvasStyle} height={height} ref={canvasRef} width={width} />
       </PanZoom>
     </div>
   );
 };
 
+// eslint-disable-next-line react/display-name
 const DrawingMemo: React.FC<Omit<DrawingProps, 'apiRef'>> = memo(forwardRef(
   (props, ref) => <Drawing apiRef={ref as ApiRef} {...props} />,
 ));
