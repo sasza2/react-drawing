@@ -1,7 +1,6 @@
 import { BrushRect, DrawAction, InitAction } from 'types';
 import memo from '../helpers/brushMemo';
 
-
 const brushRect: BrushRect = ({
   fillStyle = 'black',
   lineWidth = 5,

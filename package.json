@@ -1,6 +1,6 @@
 {
   "name": "react-drawing",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React component for drawing on canvas with possibility to pan and zoom.",
   "main": "dist/main.js",
   "keywords": [
@@ -45,16 +45,16 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "jest": "^26.4.4",
-    "react": "16.9.0",
+    "react": "16.14.0",
     "ts-jest": "^26.4.4",
     "ts-loader": "~8.0.11",
     "typescript": "~4.1.2",
     "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
-    "react": ">=16.9.0"
+    "react": ">=16.14.0"
   },
   "dependencies": {
-    "@sasza/react-panzoom": "^1.6.2"
+    "@sasza/react-panzoom": "^1.7.1"
   }
 }

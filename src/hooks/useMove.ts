@@ -3,14 +3,14 @@ import {
 } from 'react';
 
 import {
-  BrushMemoReturn, Move, PanZoomAPI, Position,
+  BrushMemoReturn, Move, PanZoomApi, Position,
 } from 'types';
 import position from '../helpers/position';
 
 type UseMove = (props: {
   brush: BrushMemoReturn,
   canvasRef: MutableRefObject<HTMLCanvasElement>,
-  panZoomRef: MutableRefObject<PanZoomAPI>
+  panZoomRef: MutableRefObject<PanZoomApi>
 }) => Move
 
 const useMove: UseMove = ({ brush, canvasRef, panZoomRef }) => {
@@ -26,7 +26,7 @@ const useMove: UseMove = ({ brush, canvasRef, panZoomRef }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const childNode = panZoomRef.current.ref().current;
+    const { childNode } = panZoomRef.current;
     panZoomOffsetRef.current = {
       rect: (childNode.parentNode as HTMLDivElement).getBoundingClientRect(),
       position: panZoomRef.current.getPosition(),
